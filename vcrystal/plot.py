@@ -13,7 +13,9 @@ def __add_title(ax, plot_title):
 
 
 def __scatters(ax, points, size):
+    print(f'points = {points}')
     for point in points:
+        print(point)
         ax.scatter(float(point[0]), float(point[1]),
                    float(point[2]), c=point[3], s=size)
 
@@ -49,11 +51,14 @@ def LatticePlot(tier: int, atom_type='space_filling', plot_title=None, lines=Fal
             if(size_restrain):
                 points_conv = lattice.sizeRestraint(
                     points_conv, origin=origin, unit_size=restraint, mode=out_of_box_mode)
+                print(points_conv)
             __scatters(ax, points_conv, size=atom_size)
         if(show_primitive):
             points_prim = lattice.getPrimitiveLattice(tier)
+            print(f'1.{points_prim}')
             if(size_restrain):
                 points_prim = lattice.sizeRestraint(
                     points_prim, origin=origin, unit_size=restraint, mode=out_of_box_mode)
+                print(f'2.{points_prim}')
             __scatters(ax, points_prim, size=atom_size)
     plt.show()

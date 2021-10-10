@@ -127,7 +127,7 @@ def constructor():
             color = 'b'
         ex = str(input('Enter more sets of coordinates? y/n :'))
         # np.concatenate or arr.append()?
-        arr = np.concatenate(arr, np.array([x, y, z, color]))
+        arr = np.concatenate(arr, np.array([[x, y, z, color]]))
         if(ex.lower() == 'n'):
             break
     return arr
@@ -150,15 +150,16 @@ def addMotif(lattice: np.array, basis=None):
                         continue
                     else:
                         # newpoint = [x1+x2, y1+y2, z1+z2, motifs_color] then turned into str
-                        newpoint = np.array[float(point[0])+float(motifs[0]), float(
-                            point[1])+float(motifs[1]), float(point[2])+float(motifs[2]), motifs[3]]
+                        newpoint = np.array[[float(point[0])+float(motifs[0]), float(
+                            point[1])+float(motifs[1]), float(point[2])+float(motifs[2]), motifs[3]]]
+                        # concat needs the new point be [[x,y,z]]
                         newpoints = np.concatenate(newpoints, newpoint)
             lattice = np.concatenate(lattice, newpoints)
             return lattice
 
 
 def __isInParam(point, origin, x_pos, y_pos, z_pos):
-    if(point[0] < origin or point[0] > x_pos or point[1] < origin or point[1] > y_pos or point[2] < origin or point[2] > z_pos):
+    if(float(point[0]) < origin or float(point[0]) > x_pos or float(point[1]) < origin or float(point[1]) > y_pos or float(point[2]) < origin or float(point[2]) > z_pos):
         return False
     else:
         return True
@@ -166,8 +167,7 @@ def __isInParam(point, origin, x_pos, y_pos, z_pos):
 
 def __delByIndex(lattice, indices):
     # indices must be a list of integers
-    for index in indices:
-        lattice = np.delete(lattice, index)
+    lattice = np.delete(lattice, indices, axis=0)
     return lattice
 
 
@@ -178,7 +178,9 @@ def __changeByIndex(lattice, index_change, replace_with, indices: list):
 
 
 def sizeRestraint(lattice: np.array, origin=0.0, unit_size=1.0, mode='delete', color_select='auto'):
-    x_pos, y_pos, z_pos = origin + unit_size
+    x_pos = origin + unit_size
+    y_pos = origin + unit_size
+    z_pos = origin + unit_size
     disqualify = []
     index = 0
     for point in lattice:
