@@ -9,8 +9,11 @@ from src import lattice, exceptions
 PI = math.pi
 
 
+def add_title(ax, plot_title):
+    ax.set_title(plot_title)
+
+
 def scatters(ax, points):
-    print(points)
     for point in points:
         ax.scatter(float(point[0]), float(point[1]),
                    float(point[2]), c=point[3])
@@ -27,7 +30,7 @@ def LatticePlot(tier: int, plot_title=None, lines=False, show_conventional=True,
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     if(plot_title != None):
-        ax.set_title(plot_title)
+        add_title(plot_title)
     if(lines):
         pass
     else:

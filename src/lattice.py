@@ -106,3 +106,20 @@ def getPrimitiveLattice(tier: int):
         ])
     else:
         return False
+
+
+def constructor():
+    arr_x, arr_y, arr_z = []
+    i = 0
+    while(True):
+        x = float(input(f'Enter the {i}th x coordinate: '))
+        arr_x.append(x)
+        y = float(input(f'Enter the {i}th y coordinate: '))
+        arr_y.append(y)
+        z = float(input(f'Enter the {i}th z coordinate: '))
+        arr_z.append(z)
+        ex = str(input('Enter more sets of coordinates? y/n :'))
+        if(ex.lower() == 'n'):
+            break
+    final = np.array(arr_x, arr_y, arr_z)
+    return final
