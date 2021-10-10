@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from src import exceptions
+from vcrystal import exceptions
 
 
 def caseconv(string):
@@ -89,7 +89,10 @@ def getLattice(tier: int):
 def getPrimitiveLattice(tier: int):
     # cubic P lattice
     if(tier == 0):
-        return getLattice('cubicp')
+        res = getLattice(0)
+        for point in res:
+            point[3] = 'r'
+        return res
 
     # cubic I lattice
     elif(tier == 1):
