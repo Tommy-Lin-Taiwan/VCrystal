@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from vcrystal import exceptions
+import random
 
 
 def caseconv(string):
@@ -122,8 +123,8 @@ def constructor():
         y = str(input(f'Enter the {i}th y coordinate: '))
         z = str(input(f'Enter the {i}th z coordinate: '))
         color = str(
-            input(f'Enter the {i}th color for the coordinate: ')).lower()
-        if(color == 'blue' or color == 'b'):
+            input(f'Enter the {i}th color for the coordinate(default is blue, type "default" for auto assign): ')).lower()
+        if(color == 'default'):
             color = 'b'
         ex = str(input('Enter more sets of coordinates? y/n :'))
         # np.concatenate or arr.append()?
@@ -131,6 +132,15 @@ def constructor():
         if(ex.lower() == 'n'):
             break
     return arr
+
+
+def randomPoints(amount: int, origin=0.0, range=[1.0, 1.0, 1.0], color='b'):
+    new = []
+    for i in range(amount):
+        new.append([origin + random.random()*range[0], origin +
+                   random.random()*range[1], origin + random.random()*range[2], color])
+    result = np.array(new)
+    return result
 
 
 def addMotif(lattice: np.array, basis=None):

@@ -20,7 +20,7 @@ def __scatters(ax, points, size):
                    float(point[2]), c=point[3], s=size)
 
 
-def __plotlines(ax, points, color='r'):
+def __plotlinesAll(ax, points, color='r'):
     for i in range(points[0].length):
         for j in range(i, points[0].length):
             ax.plot([float(points[0][i]), float(points[1][i]), float(points[2][i])], [
@@ -37,7 +37,7 @@ def __plot_type(type: str):
         return 20
 
 
-def LatticePlot(tier: int, atom_type='space_filling', plot_title=None, lines=False, show_conventional=True, show_primitive=False, size_restrain=False, origin=0.0, restraint=1.0, out_of_box_mode='delete'):
+def LatticePlot(tier: int = 0, atom_type='space_filling', plot_title=None, lines=False, show_conventional=True, show_primitive=False, size_restrain=False, origin=0.0, restraint=1.0, out_of_box_mode='delete'):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     atom_size = __plot_type(atom_type)
